@@ -84,3 +84,14 @@ class SearchAmazonUK(BaseAction):
 register_cluster_action(SearchAmazonUK())
 register_album_action(SearchAmazonUK())
 
+class SearchAmazonIT(BaseAction):
+    NAME = "Search Amazon.it"
+    def callback(self, objs):
+        cluster = objs[0]
+        url = "http://www.amazon.it/s/?url=search-alias%3Dpopular&field-keywords="
+        url += QtCore.QUrl.toPercentEncoding(cluster.metadata["artist"])
+        url += " "
+        url += QtCore.QUrl.toPercentEncoding(cluster.metadata["album"])
+        webbrowser2.open(url)
+register_cluster_action(SearchAmazonIT())
+register_album_action(SearchAmazonIT())
